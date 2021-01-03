@@ -13,13 +13,14 @@ impl RawAST {
     pub fn push(&mut self, elem: RawAST) {
         match self {
             RawAST::Lam(RawLambda::Args(vec)) => vec.push(elem),
-            RawAST::Lam(RawLambda::Full(args, vec)) => vec.push(elem),
+            RawAST::Lam(RawLambda::Full(_, vec)) => vec.push(elem),
             RawAST::App(vec) => vec.push(elem),
             _ => (),
         }
     }
 }
 
+#[derive(Clone)]
 pub enum AST {
     Sym(String),
     Lam(String, Box<AST>),
